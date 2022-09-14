@@ -1,0 +1,50 @@
+{
+	"name": "e-seal-helper",
+	"type": "module",
+	"version": "0.0.0",
+	"description": "Generate electronic seal",
+	"author": "CondorHero",
+	"license": "GPL-3.0",
+	"homepage": "https://github.com/condorheroblog/e-seal-helper#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/condorheroblog/e-seal-helper.git"
+	},
+	"bugs": {
+		"url": "https://github.com/condorheroblog/e-seal-helper/issues"
+	},
+	"keywords": [
+		"seal"
+	],
+	"scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"postinstall": "simple-git-hooks",
+		"release": "bumpp package.json packages/*/package.json --commit --push --tag"
+	},
+	"dependencies": {
+		"@vant/weapp": "^1.10.4",
+		"mobx-miniprogram": "^4.13.2",
+		"mobx-miniprogram-bindings": "^2.1.5"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config-ts": "^0.26.3",
+		"@types/wechat-miniprogram": "^3.4.1",
+		"bumpp": "^8.2.1",
+		"eslint": "^8.23.0",
+		"eslint-plugin-wxml": "^0.7.5",
+		"lint-staged": "^13.0.3",
+		"simple-git-hooks": "^2.8.0"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "npx lint-staged",
+		"preserveUnused": [
+			"commit-msg"
+		]
+	},
+	"lint-staged": {
+		"src/*.{json,js,jsx,mjs,cjs,ts,tsx,md}": [
+			"eslint --fix"
+		]
+	}
+}
