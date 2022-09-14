@@ -92,5 +92,6 @@ App({
 		!store.fontList.includes('黑体') && downloadFont('SimHei')
 		!store.fontList.includes('仿宋') && downloadFont('FangSong')
 		!store.fontList.includes('宋体') && downloadFont('SimSun')
+		// TODO: 默认字体的顺序
 	},
 })

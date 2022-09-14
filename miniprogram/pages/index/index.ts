@@ -9,15 +9,20 @@ const warningMessage = '⚠️ 免责声明，工具只供个人学习使用，�
 ComponentWithStore({
 	behaviors: [storeBindingsBehavior],
 	storeBindings: storeBehavior,
+	options: {
+		styleIsolation: 'shared',
+	},
 	data: {
 		isShowPopup: false,
+		curFontType: '',
 		sealBase64: '',
 		warningMessage,
 		legalName: '',
 		specialName: '',
 		infoEncode: '',
-		emulateLevel: 0,
-		legalNameFontFamily: '宋体',
+		emulateLevel: '0',
+		zhCnFontFamily: '宋体',
+		enFontFamily: 'Arial',
 	},
 	lifetimes: {
 		attached() {
@@ -47,8 +52,9 @@ ComponentWithStore({
 				emulateLevel: event.detail,
 			})
 		},
-		openSelectFont() {
+		openSelectFont(event: WechatMiniprogram.BaseEvent) {
 			this.setData({
+				curFontType: event.target.dataset.curfonttype,
 				isShowPopup: true,
 			})
 		},
@@ -59,20 +65,28 @@ ComponentWithStore({
 		},
 		pickerFont(pickEvent: any) {
 			const { value } = pickEvent.detail
-			this.setData({
-				legalNameFontFamily: value,
-			})
+			if (this.data.curFontType === 'zhFontFamily') {
+				this.setData({
+					zhCnFontFamily: value,
+				})
+			}
+			else {
+				this.setData({
+					enFontFamily: value,
+				})
+			}
+
 			this.closeSelectFont()
 		},
 		async createSeal(canvasOptions: any) {
 			const {
 				legalName,
 				specialName,
-				legalNameFontFamily,
+				zhCnFontFamily,
+				enFontFamily,
 				circleRadius,
 				infoEncode,
 				emulateLevel,
-				specialNameFontFamily = 'Arial',
 				canvasWidth = 500,
 				canvasHeight = 500,
 				lineWidth = 7,
@@ -105,7 +119,7 @@ ComponentWithStore({
 			renderFivePointedStar(canvasRenderingContext2D, coordinateOriginX, coordinateOriginY, 45, strokeStyle, 0)
 
 			// 绘制专用章名称
-			canvasRenderingContext2D.font = `22px ${specialNameFontFamily}`
+			canvasRenderingContext2D.font = `22px ${zhCnFontFamily}`
 			canvasRenderingContext2D.textBaseline = 'middle'
 			canvasRenderingContext2D.textAlign = 'center'
 			canvasRenderingContext2D.lineWidth = 1
@@ -116,7 +130,7 @@ ComponentWithStore({
 			fixStartPointCircularText(canvasRenderingContext2D, {
 				circularText: legalName,
 				fontSize: '30px',
-				fontFamily: legalNameFontFamily,
+				fontFamily: zhCnFontFamily,
 				coordinateOriginX,
 				coordinateOriginY,
 				distance: newCircleRadius - 22,
@@ -128,7 +142,7 @@ ComponentWithStore({
 			fixMidpointCircularText(canvasRenderingContext2D, {
 				circularText: infoEncode,
 				fontSize: '20px',
-				fontFamily: specialNameFontFamily,
+				fontFamily: enFontFamily,
 				coordinateOriginX,
 				coordinateOriginY,
 				distance: newCircleRadius - 15,
@@ -154,20 +168,21 @@ ComponentWithStore({
 		},
 	},
 	observers: {
-		'legalName, specialName, legalNameFontFamily, infoEncode, emulateLevel': function (
+		'legalName, specialName, zhCnFontFamily, infoEncode, emulateLevel, enFontFamily': function (
 			legalName: string,
 			specialName: string,
-			legalNameFontFamily: string,
+			zhCnFontFamily: string,
 			infoEncode: string,
 			emulateLevel: number,
+			enFontFamily: string,
 		) {
 			this.createSeal({
 				legalName,
 				specialName,
-				legalNameFontFamily,
+				zhCnFontFamily,
 				infoEncode,
 				emulateLevel,
-				// specialNameFontFamily,
+				enFontFamily,
 			})
 		},
 	},
