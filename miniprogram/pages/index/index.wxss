@@ -1,0 +1,11 @@
+.container {
+	margin: 0 1rem;
+}
+.center-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.save-btn {
+	margin-top: 0.5rem;
+}

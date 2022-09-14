@@ -1,0 +1,36 @@
+<!-- index.wxml -->
+<view class="container">
+	<van-dialog id="van-dialog" />
+	<van-notice-bar left-icon="warning" scrollable mode="link" bind:click="handleNoticeBar" text="{{warningMessage}}" />
+	<view class="center-box">
+			<van-image width="20rem" height="20rem" fit="contain" alt="seal.jpg" src="{{sealBase64}}"></van-image>
+	</view>
+	<van-popup show="{{ isShowPopup }}" position="bottom">
+			<van-picker show-toolbar title="选择法定名称字体" columns="{{ fontList }}" default-index="{{ 1 }}" bind:cancel="closeSelectFont" bind:confirm="pickerFont" />
+	</van-popup>
+	<form catchsubmit="formSubmit" catchreset="formReset">
+			<van-field label="字体" readonly value="{{ legalNameFontFamily }}" placeholder="请选择……" right-icon="arrow-down" bind:click-input="openSelectFont" bind:click-icon="openSelectFont" />
+			<van-field label="法定名称" model:value="{{ legalName }}" placeholder="请输入……" />
+			<van-field label="专用章名" model:value="{{ specialName }}" placeholder="请输入……" />
+			<van-field label="信息编码" model:value="{{ infoEncode }}" placeholder="请输入……" />
+			<van-radio-group
+				direction="horizontal"
+				value="{{ emulateLevel }}"
+				bind:change="emulateLevelChange"
+			>
+					<van-radio name="0">仿真 0</van-radio>
+					<van-radio name="1">仿真 1</van-radio>
+					<van-radio name="2">仿真 2</van-radio>
+					<van-radio name="3">仿真 3</van-radio>
+					<van-radio name="4">仿真 4</van-radio>
+			</van-radio-group>
+			<!-- <van-slider min="0" max="4" step="1" value="{{emulateLevel}}" bind:change="emulateLevelChange"/> -->
+	</form>
+	<view class="save-btn">
+			<van-row>
+					<van-col span="8" offset="8">
+							<van-button block type="primary" bind:click="saveSealImage">保存</van-button>
+					</van-col>
+			</van-row>
+	</view>
+</view>
