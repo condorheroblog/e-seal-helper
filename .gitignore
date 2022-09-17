@@ -6,3 +6,13 @@ yarn-error.log*
 /**/miniprogram_npm
 sitemap.json
 project.private.config.json
+.vite-ssg-dist
+.vite-ssg-temp
+*.local
+dist
+dist-ssr
+.idea/
+*.log
+
+# Local Netlify folder
+.netlify

@@ -1,0 +1,32 @@
+{
+	"pages": [
+		"pages/index/index"
+	],
+	"lazyCodeLoading": "requiredComponents",
+	"usingComponents": {
+		"van-row": "@vant/weapp/row/index",
+		"van-col": "@vant/weapp/col/index",
+		"van-popup": "@vant/weapp/popup/index",
+		"van-image": "@vant/weapp/image/index",
+		"van-field": "@vant/weapp/field/index",
+		"van-dialog": "@vant/weapp/dialog/index",
+		"van-button": "@vant/weapp/button/index",
+		"van-picker": "@vant/weapp/picker/index",
+		"van-slider": "@vant/weapp/slider/index",
+		"van-radio": "@vant/weapp/radio/index",
+		"van-grid": "@vant/weapp/grid/index",
+		"van-grid-item": "@vant/weapp/grid-item/index",
+		"van-radio-group": "@vant/weapp/radio-group/index",
+		"van-cell": "@vant/weapp/cell/index",
+		"van-cell-group": "@vant/weapp/cell-group/index",
+		"van-notice-bar": "@vant/weapp/notice-bar/index",
+		"van-action-sheet": "@vant/weapp/action-sheet/index"
+	},
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "电子印章助手",
+		"navigationBarTextStyle": "black"
+	},
+	"sitemapLocation": "sitemap.json"
+}

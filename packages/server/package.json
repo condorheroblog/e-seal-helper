@@ -1,0 +1,14 @@
+{
+	"name": "@e-seal-helper/server",
+	"type": "module",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"lint": "eslint ."
+	},
+	"devDependencies": {
+		"@netlify/functions": "^1.2.0",
+		"canvas": "^2.10.1",
+		"es-dirname": "^0.1.0"
+	}
+}

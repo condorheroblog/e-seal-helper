@@ -15,7 +15,7 @@
 		"requireMiniProgram": true
 	},
 	"plugins": ["wxml"],
-	"extends": "@antfu/eslint-config-ts",
+	"extends": "@antfu",
 	"rules": {
 		"no-tabs": "off",
 		"@typescript-eslint/indent": "off",
@@ -25,7 +25,9 @@
 			{
 				"SwitchCase": 1
 			}
-		]
+		],
+		"vue/html-indent": ["error", "tab"]
+
 	},
 	"overrides": [
 		{

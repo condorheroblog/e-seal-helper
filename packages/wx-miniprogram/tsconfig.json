@@ -1,0 +1,34 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"target": "ES2020",
+		"allowJs": true,
+		"moduleResolution": "node",
+		"strictNullChecks": true,
+		"noImplicitThis": true,
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"noUnusedLocals": true,
+		"noImplicitReturns": true,
+		"noUnusedParameters": true,
+		"lib": [
+			"ESNext"
+		],
+		"paths": {
+			"@vant/weapp/*": [
+				"./node_modules/@vant/weapp/dist/*"
+			],
+			// https://developers.weixin.qq.com/community/develop/doc/00084e34e38748b6821d5626856800?highline=miniprogram%20paths
+			"#/*": [
+				"./miniprogram/*"
+			]
+		}
+	},
+	"include": [
+		"**/*.ts"
+	],
+	"exclude": [
+		"**/node_modules",
+		"**/miniprogram_npm"
+	]
+}

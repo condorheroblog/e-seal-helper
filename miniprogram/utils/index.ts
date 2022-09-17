@@ -1,7 +1,0 @@
-export * from './mergeImage'
-export * from './getFontList'
-export * from './getImageElement'
-export * from './renderCircularText'
-export * from './isSupportFontFamily'
-export * from './renderFivePointedStar'
-export * from './saveImageToPhotosAlbum'

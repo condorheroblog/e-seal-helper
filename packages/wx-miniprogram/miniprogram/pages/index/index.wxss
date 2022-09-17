@@ -1,0 +1,24 @@
+.container {
+	margin: 0 1rem;
+	padding-bottom: 30rpx;
+}
+.seal-image .van-image {
+	margin-bottom: -2rem;
+}
+.emulate-level .van-grid-item .van-grid-item__content {
+	padding: 10rpx;
+}
+.emulate-level .van-cell__title {
+	color: var(--field-label-color, #646566);
+	max-width:6.2em;
+	min-width:6.2em;
+	margin-right: 12px;
+}
+.center-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.save-btn {
+	margin-top: 0.5rem;
+}

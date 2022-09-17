@@ -1,0 +1,32 @@
+{
+	"name": "@e-seal-helper/miniprogram",
+	"type": "module",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Generate electronic seal for miniprogram",
+	"author": "CondorHero",
+	"license": "GPL-3.0",
+	"homepage": "https://github.com/condorheroblog/e-seal-helper#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/condorheroblog/e-seal-helper.git"
+	},
+	"bugs": {
+		"url": "https://github.com/condorheroblog/e-seal-helper/issues"
+	},
+	"keywords": [
+		"seal"
+	],
+	"scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
+	},
+	"dependencies": {
+		"@vant/weapp": "^1.10.5",
+		"mobx-miniprogram": "^4.13.2",
+		"mobx-miniprogram-bindings": "^2.1.5"
+	},
+	"devDependencies": {
+		"@types/wechat-miniprogram": "^3.4.1"
+	}
+}

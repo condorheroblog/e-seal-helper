@@ -13,23 +13,13 @@
 		"noUnusedParameters": true,
 		"lib": [
 			"ESNext"
-		],
-		"baseUrl": "./",
-		"paths": {
-			"@vant/weapp/*": [
-				"./node_modules/@vant/weapp/dist/*"
-			],
-			// https://developers.weixin.qq.com/community/develop/doc/00084e34e38748b6821d5626856800?highline=miniprogram%20paths
-			"#/*": [
-				"./miniprogram/*"
-			]
-		}
+		]
 	},
 	"include": [
-		"./**/*.ts"
+		"**/*.ts"
 	],
 	"exclude": [
-		"./**/node_modules",
-		"./**/miniprogram_npm"
+		"**/node_modules",
+		"**/miniprogram_npm"
 	]
 }
