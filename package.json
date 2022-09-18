@@ -24,7 +24,7 @@
 		"lint:fix": "eslint . --fix",
 		"postinstall": "simple-git-hooks",
 		"build:install": "pnpm -r --filter=./packages/client --filter=./packages/server install",
-		"build:client": "pnpm run build:install && pnpm -r --filter=./packages/client run build",
+		"build:client": "pnpm run build:install && cp ./packages/server/hack-node-canvas/* ./packages/server/node_modules/canvas/build/Release/ && pnpm -r --filter=./packages/client run build",
 		"release": "bumpp package.json packages/*/package.json --commit --push --tag"
 	},
 	"dependencies": {},
