@@ -24,9 +24,6 @@ export const handler: Handler = async (event: HandlerEvent) => {
 		return {
 			statusCode: 200,
 			body: JSON.stringify({ tempFilePath }),
-			headers: {
-				'Access-Control-Allow-Origin': '*',
-			},
 		}
 	}
 	return {
