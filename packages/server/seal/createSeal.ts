@@ -22,7 +22,7 @@ export const createSeal = async (canvasOptions: any) => {
 		scaleX = 1,
 		scaleY = 1,
 	} = canvasOptions
-	const zhCnFontPath = join(dirname(), `../font/${zhCnFontFamily}.ttf`)
+	const zhCnFontPath = join(dirname(), `../font/${zhCnFontFamily}.woff`)
 	registerFont(zhCnFontPath, { family: zhCnFontFamily })
 	const offscreenCanvas = createCanvas(canvasWidth, canvasHeight)
 	const canvasRenderingContext2D = offscreenCanvas.getContext('2d')
