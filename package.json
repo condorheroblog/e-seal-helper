@@ -23,6 +23,8 @@
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"postinstall": "simple-git-hooks",
+		"build:install": "pnpm -r --filter=./packages/client --filter=./packages/server install",
+		"build:client": "pnpm run build:install && pnpm -r --filter=./packages/client run build",
 		"release": "bumpp package.json packages/*/package.json --commit --push --tag"
 	},
 	"dependencies": {},
