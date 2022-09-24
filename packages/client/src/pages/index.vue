@@ -2,22 +2,24 @@
 import type { FormInst } from 'naive-ui'
 import { useMessage } from 'naive-ui'
 import { useSpinStore } from '~/store/spin'
+import { DrawSeal } from '~/utils'
+import { domtoimage } from '~/utils/dom2Image'
 const { openSpin, closeSpin } = useSpinStore()
 
 const message = useMessage()
-const isShowModal = ref(false)
-const imageUrl = ref('')
-const sealFormRef = ref<FormInst | null>(null)
-const sealModel = ref({
-	zhCnFontFamily: 'SimSun',
+let isShowModal = $ref(false)
+let imageUrl = $ref('')
+const sealFormRef = $ref<FormInst | null>(null)
+const sealModel = $ref({
+	cnFontFamily: 'SimSun',
 	enFontFamily: 'Arial',
 	legalName: '中原武林布袋和尚有限责任公司',
 	specialName: '化缘专用章',
 	infoEncode: '0123456789ABCDEF',
 	emulateLevel: '0',
 })
-const sealRules = ref({
-	zhCnFontFamily: {
+const sealRules = $ref({
+	cnFontFamily: {
 		required: true,
 		trigger: ['blur', 'input'],
 		message: '请选择',
@@ -77,20 +79,38 @@ const generalOptions = [
 
 const handleValidateButtonClick = (e: MouseEvent) => {
 	e.preventDefault()
-	sealFormRef.value?.validate((errors) => {
+	sealFormRef?.validate((errors) => {
 		if (!errors) {
 			// message.success('验证成功')
 			openSpin()
-			// const { tempFilePath } = await fetch('.netlify/functions/generate-seal', {
-			fetch('http://localhost:8888/.netlify/functions/generate-seal', {
+			fetch('/.netlify/functions/generate-seal', {
 				method: 'POST',
-				body: JSON.stringify(sealModel.value),
+				body: JSON.stringify({
+					...sealModel,
+					legalNameFontSize: 30,
+					specialNameFontSize: 22,
+					infoEncodeFontSize: 20,
+				}),
 			})
 				.then(res => res.json())
-				.then(({ tempFilePath }) => {
+				.then(async (textPaths) => {
+					const { legalNamePaths, specialNamePaths, codePaths } = textPaths
+					const sealInstance = new DrawSeal(sealModel)
+					const result = sealInstance
+						.createSeal()
+						.renderBackground()
+						.renderArc()
+						.renderLineText(specialNamePaths)
+						.rangeCircularText(legalNamePaths)
+						.midpointCircularText(codePaths)
+						.renderStar()
+						.toDataURL()
+
+					const ret = await sealInstance.blendLayer(result!)
+					// console.log(result)
 					message.success('生成成功')
-					isShowModal.value = true
-					imageUrl.value = tempFilePath
+					isShowModal = true
+					imageUrl = ret
 				}).finally(() => closeSpin())
 		}
 		else {
@@ -115,8 +135,8 @@ const handleValidateButtonClick = (e: MouseEvent) => {
 				ref="sealFormRef" :model="sealModel" :rules="sealRules" label-placement="left" label-width="auto"
 				require-mark-placement="right-hanging" size="medium"
 			>
-				<n-form-item label="汉字字体" path="zhCnFontFamily">
-					<n-select v-model:value="sealModel.zhCnFontFamily" placeholder="请选择……" :options="generalOptions" />
+				<n-form-item label="汉字字体" path="cnFontFamily">
+					<n-select v-model:value="sealModel.cnFontFamily" placeholder="请选择……" :options="generalOptions" />
 				</n-form-item>
 				<n-form-item label="信息编码字体" path="enFontFamily">
 					<n-select v-model:value="sealModel.enFontFamily" placeholder="请选择……" :options="generalOptions" />
@@ -162,7 +182,7 @@ const handleValidateButtonClick = (e: MouseEvent) => {
 			<template #header>
 				<div>预览</div>
 			</template>
-			<n-image round :src="imageUrl" alt="imageUrl" />
+			<n-image id="image" round :src="imageUrl" alt="imageUrl" />
 			<template #action>
 				<n-button size="large" w30>
 					下载

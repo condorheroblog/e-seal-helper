@@ -1,12 +1,12 @@
-import { createCanvas } from 'canvas'
 import { getImageElement } from './getImageElement'
 
 export const mergeImage = (baseImgPath: string, sealImg: string) => {
 	return new Promise<string>((resolve, reject) => {
 		(async () => {
 			try {
-				const offscreenCanvas = createCanvas(500, 500)
-				const canvasRenderingContext2D = offscreenCanvas.getContext('2d')
+				const offscreenCanvas = document.createElement('canvas')
+				offscreenCanvas.width = offscreenCanvas.height = 500
+				const canvasRenderingContext2D = offscreenCanvas.getContext('2d')!
 				canvasRenderingContext2D.globalCompositeOperation = 'lighten'
 				// const baseImgInfo = await getImageElement(
 				// 	baseImgPath,

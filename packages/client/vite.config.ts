@@ -10,6 +10,16 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
+	server: {
+		proxy: {
+			'/.netlify': {
+				target: 'http://localhost:8888/',
+				changeOrigin: true,
+				rewrite: path => path.replace(/^\/\.netlify/, '/.netlify'),
+			},
+		},
+	},
+
 	resolve: {
 		alias: {
 			'~/': `${path.resolve(__dirname, 'src')}/`,

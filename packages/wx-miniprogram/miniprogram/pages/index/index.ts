@@ -21,7 +21,7 @@ ComponentWithStore({
 		specialName: '',
 		infoEncode: '',
 		emulateLevel: '0',
-		zhCnFontFamily: '宋体',
+		cnFontFamily: '宋体',
 		enFontFamily: 'Arial',
 	},
 	lifetimes: {
@@ -67,7 +67,7 @@ ComponentWithStore({
 			const { value } = pickEvent.detail
 			if (this.data.curFontType === 'zhFontFamily') {
 				this.setData({
-					zhCnFontFamily: value,
+					cnFontFamily: value,
 				})
 			}
 			else {
@@ -82,7 +82,7 @@ ComponentWithStore({
 			const {
 				legalName,
 				specialName,
-				zhCnFontFamily,
+				cnFontFamily,
 				enFontFamily,
 				circleRadius,
 				infoEncode,
@@ -119,7 +119,7 @@ ComponentWithStore({
 			renderFivePointedStar(canvasRenderingContext2D, coordinateOriginX, coordinateOriginY, 45, strokeStyle, 0)
 
 			// 绘制专用章名称
-			canvasRenderingContext2D.font = `22px ${zhCnFontFamily}`
+			canvasRenderingContext2D.font = `22px ${cnFontFamily}`
 			canvasRenderingContext2D.textBaseline = 'middle'
 			canvasRenderingContext2D.textAlign = 'center'
 			canvasRenderingContext2D.lineWidth = 1
@@ -130,7 +130,7 @@ ComponentWithStore({
 			fixStartPointCircularText(canvasRenderingContext2D, {
 				circularText: legalName,
 				fontSize: '30px',
-				fontFamily: zhCnFontFamily,
+				fontFamily: cnFontFamily,
 				coordinateOriginX,
 				coordinateOriginY,
 				distance: newCircleRadius - 22,
@@ -166,12 +166,15 @@ ComponentWithStore({
 				})
 			}
 		},
+		previewSealImage() {
+			// wx.request
+		},
 	},
 	observers: {
-		'legalName, specialName, zhCnFontFamily, infoEncode, emulateLevel, enFontFamily': function (
+		'legalName, specialName, cnFontFamily, infoEncode, emulateLevel, enFontFamily': function (
 			legalName: string,
 			specialName: string,
-			zhCnFontFamily: string,
+			cnFontFamily: string,
 			infoEncode: string,
 			emulateLevel: number,
 			enFontFamily: string,
@@ -179,7 +182,7 @@ ComponentWithStore({
 			this.createSeal({
 				legalName,
 				specialName,
-				zhCnFontFamily,
+				cnFontFamily,
 				infoEncode,
 				emulateLevel,
 				enFontFamily,

@@ -1,5 +1,5 @@
 import type { Handler, HandlerEvent } from '@netlify/functions'
-import { createSeal } from '../seal'
+import { getPathDataArr, getPathDataStr } from '../utils'
 
 export const handler: Handler = async (event: HandlerEvent) => {
 	const { httpMethod, body = '{}' } = event
@@ -7,23 +7,21 @@ export const handler: Handler = async (event: HandlerEvent) => {
 		const {
 			legalName,
 			specialName,
-			zhCnFontFamily,
+			cnFontFamily,
 			infoEncode,
-			emulateLevel,
 			enFontFamily,
+			legalNameFontSize,
+			specialNameFontSize,
+			infoEncodeFontSize,
 		} = JSON.parse(body!)
-		const tempFilePath = await createSeal({
-			legalName,
-			specialName,
-			zhCnFontFamily,
-			infoEncode,
-			emulateLevel,
-			enFontFamily,
-		})
+
+		const legalNamePaths = getPathDataArr(legalName, cnFontFamily, legalNameFontSize)
+		const specialNamePaths = getPathDataStr(specialName, cnFontFamily, specialNameFontSize)
+		const codePaths = getPathDataArr(infoEncode, enFontFamily, infoEncodeFontSize)
 
 		return {
 			statusCode: 200,
-			body: JSON.stringify({ tempFilePath }),
+			body: JSON.stringify({ legalNamePaths, specialNamePaths, codePaths }),
 		}
 	}
 	return {

@@ -32,7 +32,7 @@
 			<van-field
 				readonly
 				label="汉字字体"
-				value="{{ zhCnFontFamily }}"
+				value="{{ cnFontFamily }}"
 				placeholder="请选择……"
 				required right-icon="arrow-down"
 				bind:click-input="openSelectFont"
@@ -91,8 +91,11 @@
 	<view class="save-btn">
 			<van-row>
 					<van-col span="8" offset="8">
-							<van-button block type="primary" bind:click="saveSealImage">保存</van-button>
+							<van-button block type="primary" bind:click="previewSealImage">预览</van-button>
 					</van-col>
+					<!-- <van-col span="8" offset="8">
+							<van-button block type="primary" bind:click="saveSealImage">保存</van-button>
+					</van-col> -->
 			</van-row>
 	</view>
 </view>

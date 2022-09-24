@@ -1,9 +1,10 @@
 [build.environment]
-	NPM_FLAGS = "--force"
+	NODE_VERSION = "14"
 
 [build]
 	publish = "packages/client/dist"
 	command = "npx pnpm run build:client"
+	functions = "packages/server/functions"
 
 [functions]
 	directory = "packages/server/functions"
